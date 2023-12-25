@@ -14,3 +14,4 @@ export type TReview = {
 export interface TCourseModel extends Model<TReview> {
     isValidCourseId(id: string): Promise<TReview | null>;
 }
+
