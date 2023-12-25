@@ -6,6 +6,7 @@ const ReviewSchema = new Schema<TReview, TCourseModel>({
     courseId: { type: Schema.Types.ObjectId, required: [true, 'CourseId is required'], ref: 'Course' },
     rating: { type: Number, required: [true, 'Rating is required'] },
     review: { type: String, required: [true, 'Review is required'] },
+    createdBy: { type: Schema.Types.ObjectId, required: [true, 'UId is required'], ref: 'User' },
 });
 
 ReviewSchema.statics.isValidCourseId = async (id: string) => {

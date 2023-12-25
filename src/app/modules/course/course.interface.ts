@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Model } from "mongoose";
+import { Model, Types } from "mongoose";
 
 export type TTag = {
     name: string;
@@ -21,6 +21,7 @@ export type TCourse = {
         level: 'Beginner' | 'Intermediate' | 'Advanced';
         description: string;
     };
+    createdBy: Types.ObjectId
 }
 
 export interface TCategoryModel extends Model<TCourse> {

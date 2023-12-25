@@ -1,12 +1,14 @@
 import { Model, Types } from "mongoose"
 
 export type TCategory = {
-    name: string
+    name: string,
+    createdBy: Types.ObjectId
 }
 export type TReview = {
     courseId: Types.ObjectId,
     rating: number,
-    review: string
+    review: string,
+    createdBy: Types.ObjectId
 }
 
 export interface TCourseModel extends Model<TReview> {
