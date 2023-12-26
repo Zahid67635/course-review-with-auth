@@ -13,7 +13,7 @@ const createCourseIntoDB = async (course: TCourse) => {
 
 const getAllCourseFromDB = async (query: Record<string, unknown>) => {
 
-    const filteredData = filter(CourseModel.find(), query)
+    const filteredData = filter(CourseModel.find().populate({ path: 'createdBy', select: '-password -createdAt -updatedAt' }), query)
     if (query.sortBy && query.sortOrder) {
         const sortBy = query.sortBy
         const sortOrder = query.sortOrder

@@ -27,7 +27,7 @@ const CourseSchema = new Schema<TCourse, TCategoryModel>({
         },
         description: { type: String, required: true },
     },
-    createdBy: { type: Schema.Types.ObjectId, required: [true, 'UId is required'], ref: 'User' },
+    createdBy: { type: Schema.Types.ObjectId, ref: 'User' },
 });
 
 CourseSchema.statics.isValidCategoryId = async (id: string) => {

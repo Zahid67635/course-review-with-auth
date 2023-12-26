@@ -2,12 +2,15 @@ import { NextFunction, Request, RequestHandler, Response } from "express"
 import { CourseSchemaValidation } from "./course.validation"
 import { courseServices } from "./course.service"
 import { calculateDurationInWeeks } from "./course.utils"
+import { Types } from "mongoose"
 
 const createCourse = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const course = req.body
         const zodData = CourseSchemaValidation.parse(course)
         zodData.durationInWeeks = calculateDurationInWeeks(zodData.startDate, zodData.endDate)
+
+        zodData.createdBy = new Types.ObjectId(req?.user?._id)
         const result = await courseServices.createCourseIntoDB(zodData)
         res.status(200).json({
             success: true,

@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { z } from "zod";
 
 const TagSchema = z.object({
@@ -20,4 +21,5 @@ export const CourseSchemaValidation = z.object({
         level: z.enum(['Beginner', 'Intermediate', 'Advanced']),
         description: z.string().min(2),
     }),
+    createdBy: z.instanceof(mongoose.Types.ObjectId).optional()
 });

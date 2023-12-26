@@ -7,7 +7,6 @@ import notFound from './middlewares/notFound';
 import { categoryRoutes } from './modules/category/category.route';
 import { reviewRoutes } from './modules/review/review.route';
 import { userRoutes } from './modules/user/user.route';
-import auth from './middlewares/auth';
 
 app.use(express.json());
 app.use(cors());
@@ -20,7 +19,7 @@ app.get('/', (req, res) => {
 app.use('/api/auth', userRoutes)
 
 app.use('/api/course', courseRoutes)
-app.use('/api/courses', auth(), courseRoutes)
+app.use('/api/courses', courseRoutes)
 app.use('/api/categories', categoryRoutes)
 app.use('/api/reviews', reviewRoutes)
 app.use('/api/courses', reviewRoutes)
