@@ -9,14 +9,14 @@ const UserSchema = new Schema<TUser, TUserModel>({
         type: String, required: [true, 'UserName is required']
     },
     email: { type: String, required: [true, 'Email is required'], unique: true },
-    password: { type: String, required: [true, 'Password is required'], min: 8, select: 0 },
+    password: { type: String, required: [true, 'Password is required'], min: 8 },
     role: { type: String, enum: ['admin', 'user'], default: 'user' },
 }, {
     timestamps: true
 })
 
-UserSchema.statics.isExistUser = async (email: string) => {
-    const isValid = await UserModel.findOne({ email })
+UserSchema.statics.isExistUser = async (username: string) => {
+    const isValid = await UserModel.findOne({ username })
     return isValid
 }
 

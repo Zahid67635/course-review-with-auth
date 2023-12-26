@@ -6,3 +6,8 @@ export const UserValidationSchema = z.object({
     email: z.string(),
     role: z.enum(['user', 'admin'])
 });
+
+export const loginValidationSchema = z.object({
+    username: z.string({ required_error: 'username is required' }),
+    password: z.string({ required_error: 'password is required' }).min(8),
+});

@@ -1,12 +1,17 @@
-import { Model } from "mongoose";
+import { Model, Types } from "mongoose";
 
 export type TUser = {
+    _id?: Types.ObjectId
     username: string,
     email: string,
     password: string,
     role: 'user' | 'admin'
 }
+export type TLogin = {
+    username: string,
+    password: string
+}
 
 export interface TUserModel extends Model<TUser> {
-    isExistUser(email: string): Promise<TUser | null>;
+    isExistUser(username: string): Promise<TUser | null>;
 }
