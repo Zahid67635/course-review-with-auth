@@ -13,13 +13,12 @@ const createCourseIntoDB = async (course: TCourse) => {
 
 const getAllCourseFromDB = async (query: Record<string, unknown>) => {
 
-    const filteredData = filter(CourseModel.find().populate({ path: 'createdBy', select: '-password -createdAt -updatedAt' }), query)
-    if (query.sortBy && query.sortOrder) {
+    const filteredData = filter(CourseModel.find().populate({ path: 'createdBy', select: '-password -createdAt -updatedAt -__V' }), query)
+    if (query.sortBy) {
         const sortBy = query.sortBy
-        const sortOrder = query.sortOrder
+        const sortOrder = query.sortOrder ? query.sortOrder : 'asc'
         const sortStr = `${sortOrder === 'desc' ? '-' : ''}${sortBy}`
         filteredData.sort(sortStr)
-
     }
     if (query.page || query.limit) {
         const page = Number(query.page) || 1
@@ -58,7 +57,7 @@ const updateCourseIntoDB = async (id: string, payload: Partial<TCourse>) => {
             upsert: true,
             runValidators: true,
         },
-    );
+    ).populate({ path: 'createdBy', select: '-password -createdAt -updatedAt -__v' });
 
     if (!updatedBasicCourseInfo) {
         throw new Error('Failed to update');

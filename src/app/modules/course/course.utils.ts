@@ -33,6 +33,9 @@ export const filter = <T>(modelQuery: Query<T[], T>, query: TQueryObj) => {
     if (queryObj.level) {
         queryObj = { "details.level": queryObj.level }
     }
+    if (queryObj.tags) {
+        queryObj = { "tags.name": queryObj.tags, "tags.isDeleted": false }
+    }
 
     modelQuery = modelQuery.find(queryObj)
 

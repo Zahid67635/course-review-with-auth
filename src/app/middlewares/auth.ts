@@ -14,8 +14,8 @@ const auth = (...roles: any) => {
                     throw new Error('You are not authorized 2')
                 }
                 const role = (decoded as JwtPayload).role
-                if (roles && !roles.includes(role)) {
-                    throw new Error('You are not authorized Only Admin')
+                if (roles.length > 0 && !roles.includes(role)) {
+                    throw new Error('You are not authorized as Admin')
                 }
                 req.user = decoded as JwtPayload
                 next()

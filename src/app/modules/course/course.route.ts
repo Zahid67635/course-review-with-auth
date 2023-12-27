@@ -5,7 +5,7 @@ import { USER_ROLE } from '../user/user.constant';
 const router = express.Router()
 
 router.post('/', auth(USER_ROLE.ADMIN), courseControllers.createCourse)
-router.get('/', courseControllers.getAllCourses)
-router.put('/:id', courseControllers.updateCourse)
+router.get('/', auth(), courseControllers.getAllCourses)
+router.put('/:id', auth(USER_ROLE.ADMIN), courseControllers.updateCourse)
 
 export const courseRoutes = router

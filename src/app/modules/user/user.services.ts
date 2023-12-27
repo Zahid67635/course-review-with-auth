@@ -10,17 +10,17 @@ const createAUserIntoDB = async (payload: TUser) => {
     if (await UserModel.isExistUser(payload.username)) {
         throw new Error('User is already exists!')
     }
-    const result = await UserModel.create(payload);
+    const result = (await UserModel.create(payload));
     return result;
 
 }
 const loginUserFromDB = async (payload: TLogin) => {
     const user = await UserModel.isExistUser(payload.username)
-    const isPasswordMatch =
-        await bcrypt.compare(payload.password, user?.password as string)
     if (!user) {
         throw new Error('User is not exists!')
     }
+    const isPasswordMatch =
+        await bcrypt.compare(payload.password, user?.password as string)
     if (!isPasswordMatch) {
         throw new Error('Password is not correct!')
     }

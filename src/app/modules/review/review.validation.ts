@@ -4,5 +4,6 @@ import { z } from "zod";
 export const ReviewValidationSchema = z.object({
     courseId: z.instanceof(mongoose.Types.ObjectId),
     rating: z.number().lte(5).positive(),
-    review: z.string().min(4)
+    review: z.string().min(4),
+    createdBy: z.instanceof(mongoose.Types.ObjectId).optional()
 });

@@ -6,7 +6,7 @@ const createCategoryIntoDB = async (category: TCategory) => {
     return result;
 }
 const getCategoriesFromDB = async () => {
-    const result = CategoryModel.find({})
+    const result = CategoryModel.find({}).select({ __v: 0 }).populate({ path: 'createdBy', select: '-password -createdAt -updatedAt' })
     return result
 }
 export const categoryServices = {

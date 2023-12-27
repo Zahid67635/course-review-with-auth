@@ -28,7 +28,7 @@ const CourseSchema = new Schema<TCourse, TCategoryModel>({
         description: { type: String, required: true },
     },
     createdBy: { type: Schema.Types.ObjectId, ref: 'User' },
-});
+}, { timestamps: true });
 
 CourseSchema.statics.isValidCategoryId = async (id: string) => {
     const isValid = await CategoryModel.findOne({ _id: id })

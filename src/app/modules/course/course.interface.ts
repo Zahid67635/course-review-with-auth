@@ -21,7 +21,7 @@ export type TCourse = {
         level: 'Beginner' | 'Intermediate' | 'Advanced';
         description: string;
     };
-    createdBy?: Types.ObjectId
+    createdBy?: Types.ObjectId;
 }
 
 export interface TCategoryModel extends Model<TCourse> {

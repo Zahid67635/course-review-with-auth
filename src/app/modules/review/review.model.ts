@@ -2,11 +2,11 @@ import { Schema, model } from "mongoose";
 import { TCourseModel, TReview } from "../common.interface";
 import { CourseModel } from "../course/course.model";
 
-const ReviewSchema = new Schema<TReview, TCourseModel>({
+export const ReviewSchema = new Schema<TReview, TCourseModel>({
     courseId: { type: Schema.Types.ObjectId, required: [true, 'CourseId is required'], ref: 'Course' },
     rating: { type: Number, required: [true, 'Rating is required'] },
     review: { type: String, required: [true, 'Review is required'] },
-    createdBy: { type: Schema.Types.ObjectId, required: [true, 'UId is required'], ref: 'User' },
+    createdBy: { type: Schema.Types.ObjectId, ref: 'User' },
 });
 
 ReviewSchema.statics.isValidCourseId = async (id: string) => {
