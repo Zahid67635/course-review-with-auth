@@ -61,6 +61,8 @@ Ensure you have the following installed before running the application:
    ```env
    PORT=5000
    DB_URL=your_mongodb_uri
+   SALTROUND = 16 (example)
+   JWT_ACCESS_SEC = Password (example)
    ```
 
 ## Running the Application
