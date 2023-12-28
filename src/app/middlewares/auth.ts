@@ -7,15 +7,15 @@ const auth = (...roles: any) => {
         try {
             const token = req.headers.authorization
             if (!token) {
-                throw new Error('You are not authorized 1')
+                throw new Error('You do not have the necessary permissions to access this resource.')
             }
             jwt.verify(token, config.ACCESS_SEC_JWT as string, function (err, decoded) {
                 if (err) {
-                    throw new Error('You are not authorized 2')
+                    throw new Error('You do not have the necessary permissions to access this resource.')
                 }
                 const role = (decoded as JwtPayload).role
                 if (roles.length > 0 && !roles.includes(role)) {
-                    throw new Error('You are not authorized as Admin')
+                    throw new Error('You do not have the necessary permissions to access this resource.')
                 }
                 req.user = decoded as JwtPayload
                 next()

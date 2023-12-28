@@ -12,6 +12,7 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
     let message = 'Something went wrong'
     let errorMessage = err.message
     let errorDetails = err
+    let stack = err?.stack
     if (err instanceof ZodError) {
         const simplifiedError = handleZodError(err);
         statusCode = simplifiedError?.statusCode;
@@ -28,14 +29,16 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
         statusCode = simplifiedError?.statusCode;
         message = simplifiedError?.message;
         errorDetails = err;
+    } else if (err.message === 'You do not have the necessary permissions to access this resource.') {
+        message = 'Unauthorized Access'
+        stack = null
     }
     return res.status(statusCode).json({
         success: false,
         message,
         errorMessage,
         errorDetails,
-        stack: err?.stack,
-
+        stack
     })
 }
 export default globalErrorHandler

@@ -1,8 +1,13 @@
 /* eslint-disable @typescript-eslint/no-this-alias */
 import { Schema, model } from "mongoose";
-import { TUser, TUserModel } from "./user.interface";
+import { TPasswords, TUser, TUserModel } from "./user.interface";
 import bcrypt from 'bcrypt'
 import config from "../../config";
+
+
+const prevPasswordSchema = new Schema<TPasswords>({
+    password: { type: String },
+}, { timestamps: true })
 
 const UserSchema = new Schema<TUser, TUserModel>({
     username: {
@@ -11,6 +16,7 @@ const UserSchema = new Schema<TUser, TUserModel>({
     email: { type: String, required: [true, 'Email is required'], unique: true },
     password: { type: String, required: [true, 'Password is required'], min: 8 },
     role: { type: String, enum: ['admin', 'user'], default: 'user' },
+    previousPasswords: [prevPasswordSchema]
 }, {
     timestamps: true
 })
