@@ -13,7 +13,7 @@ app.use(cors());
 
 
 app.get('/', (req, res) => {
-    res.send('Welcome to the course review operations')
+    res.send('Welcome to the course review operations with authentication and authorization')
 })
 
 app.use('/api/auth', userRoutes)

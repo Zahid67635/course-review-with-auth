@@ -5,7 +5,7 @@ import { ReviewModel } from "./review.model";
 
 const createReviewIntoDB = async (review: TReview, courseId: string) => {
     if (await ReviewModel.isValidCourseId(courseId)) {
-        const result = (await ReviewModel.create(review)).populate({ path: 'createdBy', select: '-password -createdAt -updatedAt -__V' });
+        const result = (await ReviewModel.create(review)).populate({ path: 'createdBy', select: '-password -createdAt -updatedAt -__V -previousPasswords' });
         return result;
     }
     throw new Error('CourseId is not exists!')
@@ -36,7 +36,7 @@ const getCourseDetailsFromDB = async (courseId: string) => {
         },
 
         {
-            $project: { "reviews.__v": 0, __v: 0, "tags._id": 0, 'createdBy.password': 0, 'createdBy.createdAt': 0, 'createdBy.updatedAt': 0, 'createdBy.__v': 0 }
+            $project: { "reviews.__v": 0, __v: 0, "tags._id": 0, 'createdBy.password': 0, 'createdBy.createdAt': 0, 'createdBy.updatedAt': 0, 'createdBy.__v': 0, 'createdBy.previousPasswords': 0 }
         }
     ])
     if (result) {
@@ -82,7 +82,7 @@ const bestCourseInDB = async () => {
             $project: {
                 reviews: 0,
                 __v: 0,
-                "tags._id": 0, 'createdBy.password': 0, 'createdBy.createdAt': 0, 'createdBy.updatedAt': 0, 'createdBy.__v': 0
+                "tags._id": 0, 'createdBy.password': 0, 'createdBy.createdAt': 0, 'createdBy.updatedAt': 0, 'createdBy.__v': 0, 'createdBy.previousPasswords': 0
             }
         }
 
