@@ -1,7 +1,7 @@
 
 # Express Application with Mongoose, TypeScript, Zod, Error Handling.
 
-This is an Express application where you can create courses, categories, and reviews And can get data by filtering.
+This is an Express application where you can create courses, categories, and reviews And can get data by filtering. The user has to register and log in to access data. Also, user can change his password. (Can't enter the previous 2 old passwords)
 
 ## Live-Link 
 
@@ -10,6 +10,9 @@ https://assignment-3-chi-five.vercel.app/
 
 ## End-Points:
 
+- /api/auth/register(POST) [register by username, email, password, role]
+- /api/auth/login(POST) [login by username and password]
+- /api/auth/change-password(POST) [login by username and password]
 - /api/course(POST) [Create a course]
 - /api/courses(GET) [Get all courses] [?page=2, ?limit=10, ?sortBy=price, ?language=English etc]
 - /api/courses/:courseId(PUT) [Can update a course]
@@ -18,6 +21,16 @@ https://assignment-3-chi-five.vercel.app/
 - /api/reviews(POST) [Create a review]
 - /api/courses/:courseId/reviews(GET) [Get a course with the reviews]
 - /api/course/best(GET) [Get the best course depending on rating and reviews]
+
+
+## Credentials:
+
+   # User Login:
+      * Username : nahid
+      * password : 12345678
+   # Admin Login:
+      * Username : zahid
+      * Password : 123456789
 
 
 ## Prerequisites
