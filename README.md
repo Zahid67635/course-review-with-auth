@@ -5,7 +5,7 @@ This is an Express application where you can create courses, categories, and rev
 
 ## Live-Link 
 
-https://assignment-3-chi-five.vercel.app/
+https://user-auth-practice.vercel.app/
 
 
 ## End-Points:
