@@ -32,6 +32,7 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
     } else if (err.message === 'You do not have the necessary permissions to access this resource.') {
         message = 'Unauthorized Access'
         stack = null
+        statusCode = 401
     }
     return res.status(statusCode).json({
         success: false,
